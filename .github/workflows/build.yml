@@ -83,7 +83,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             var issue_number = ${{ steps.pr_number.outputs.PR_NUMBER }}
-            await github.checks.create({
+            github.checks.create({
               repo: 'rticonnextdds-examples',
               owner: 'ManuelJNunez',
               name: 'build',
