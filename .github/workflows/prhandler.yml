@@ -34,7 +34,7 @@ jobs:
               owner: "${{github.actor}}",
               repo: "rticonnextdds-examples",
               name: "testing",
-              head_sha: "${{github.base_ref}}",
+              head_sha: "${{github.sha}}",
               status: "in_progress"
             });
 
