@@ -82,7 +82,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            var issue_number = ${{ steps.pr_number.outputs.PR_NUMBER }};
+            var issue_number = "${{ steps.pr_number.outputs.PR_NUMBER }}";
 
             github.issues.create({
               owner: "ManuelJNunez",
