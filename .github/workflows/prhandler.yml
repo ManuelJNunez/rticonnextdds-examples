@@ -26,8 +26,8 @@ jobs:
             await github.checks.create({
               owner: "ManuelJNunez",
               repo: "rticonnextdds-examples",
-              name: "Build",
-              head_sha: "6bfbc53de6dc6e8ed820da67e26c33758051b1f7",
+              name: "testing",
+              head_sha: "${{github.base_ref}}",
             });
 
       # Save the PR number for the next workflow and copy the examples and
