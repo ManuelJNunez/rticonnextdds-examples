@@ -78,12 +78,12 @@ jobs:
       # Send an information message to the user that opened the pull request.
       - name: Send information message
         if: ${{ github.event_name == 'workflow_run' }}
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v4
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             var issue_number = ${{ steps.pr_number.outputs.PR_NUMBER }};
-            await github.rest.checks.create({
+            await github.checks.create({
               repo: 'rticonnextdds-examples',
               owner: 'ManuelJNunez'
               name: 'build',
