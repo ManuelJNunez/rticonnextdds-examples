@@ -82,14 +82,14 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            var issue_number = ${{ steps.pr_number.outputs.PR_NUMBER }};
+            var issue_number = ${{ steps.pr_number.outputs.PR_NUMBER }}
             await github.checks.create({
               repo: 'rticonnextdds-examples',
               owner: 'ManuelJNunez'
               name: 'build',
               status: 'in_progress',
               head_sha: issue_number
-            });
+            })
 
       # If this workflow was triggered by a push event, it will download the
       # repository with the changes.
