@@ -84,7 +84,7 @@ jobs:
           script: |
             var issue_number = "${{ steps.pr_number.outputs.PR_NUMBER }}";
 
-            github.issues.create({
+            await github.issues.create({
               owner: "ManuelJNunez",
               repo: "rticonnextdds-examples",
               title: "Testing",
