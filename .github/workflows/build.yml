@@ -89,7 +89,7 @@ jobs:
               owner: "ManuelJNunez",
               name: "build",
               status: "in_progress",
-              head_sha: issue_number
+              head_sha: "61e6e104d2ccb995201b7f39c2196340e7f7e34d"
             })
 
       # If this workflow was triggered by a push event, it will download the
