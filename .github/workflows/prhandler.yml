@@ -4,7 +4,7 @@
 name: PR handler
 
 on:  
-  pull_request_target:
+  pull_request:
     branches:
       - master
 
@@ -18,17 +18,10 @@ jobs:
       # opened.
       - uses: actions/checkout@v2
 
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
-
       - name: Set build check
         uses: actions/github-script@v4
         with:
-          github-token: ${{ steps.generate_token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             await github.checks.create({
               owner: "${{github.actor}}",
