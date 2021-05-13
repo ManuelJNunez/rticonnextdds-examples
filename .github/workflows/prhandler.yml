@@ -19,7 +19,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set build check
-        if: ${{ github.event_name == 'workflow_run' }}
         uses: actions/github-script@v4
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
