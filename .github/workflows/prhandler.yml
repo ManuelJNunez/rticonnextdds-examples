@@ -18,16 +18,24 @@ jobs:
       # opened.
       - uses: actions/checkout@v2
 
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Set build check
         uses: actions/github-script@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.generate_token.outputs.token }}
           script: |
             await github.checks.create({
               owner: "${{github.actor}}",
               repo: "rticonnextdds-examples",
               name: "testing",
               head_sha: "${{github.base_ref}}",
+              status: "in_progress"
             });
 
       # Save the PR number for the next workflow and copy the examples and
