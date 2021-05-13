@@ -18,6 +18,19 @@ jobs:
       # opened.
       - uses: actions/checkout@v2
 
+      - name: Set build check
+        if: ${{ github.event_name == 'workflow_run' }}
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            await github.checks.create({
+              owner: "ManuelJNunez",
+              repo: "rticonnextdds-examples",
+              name: "Build",
+              head_sha: "6bfbc53de6dc6e8ed820da67e26c33758051b1f7",
+            });
+
       # Save the PR number for the next workflow and copy the examples and
       # resources folders to create the current workflow artifact.
       - name: Save PR number
