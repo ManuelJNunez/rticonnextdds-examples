@@ -75,22 +75,6 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      # Send an information message to the user that opened the pull request.
-      - name: Send information message
-        if: ${{ github.event_name == 'workflow_run' }}
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            var issue_number = "${{ steps.pr_number.outputs.PR_NUMBER }}";
-
-            await github.issues.create({
-              owner: "ManuelJNunez",
-              repo: "rticonnextdds-examples",
-              title: "Testing",
-            });
-
-
       # If this workflow was triggered by a push event, it will download the
       # repository with the changes.
       - uses: actions/checkout@v2
