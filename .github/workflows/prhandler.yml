@@ -31,7 +31,7 @@ jobs:
           github-token: ${{ steps.generate_token.outputs.token }}
           script: |
             await github.checks.create({
-              owner: "${{github.actor}}",
+              owner: "${{github.event.pull_request.user.login}}",
               repo: "rticonnextdds-examples",
               name: "testing",
               head_sha: "${{github.sha}}",
