@@ -4,7 +4,7 @@
 name: PR handler
 
 on:  
-  pull_request_target:
+  pull_request:
     branches:
       - master
 
@@ -17,13 +17,6 @@ jobs:
       # Download the source from the branch to which the pull request was
       # opened.
       - uses: actions/checkout@v2
-
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Set build check
         uses: actions/github-script@v4
