@@ -27,7 +27,7 @@ jobs:
               owner: "${{github.event.pull_request.user.login}}",
               repo: "rticonnextdds-examples",
               name: "testing",
-              head_sha: "${{github.sha}}",
+              head_sha: "${{ github.event.pull_request.head.sha }}",
               status: "in_progress"
             });
 
