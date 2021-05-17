@@ -28,7 +28,7 @@ jobs:
       - name: Set build check
         uses: actions/github-script@v4
         with:
-          github-token: ${{ steps.generate_token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             await github.checks.create({
               owner: "${{github.event.pull_request.user.login}}",
