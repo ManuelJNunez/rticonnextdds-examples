@@ -1,5 +1,5 @@
 <!-- markdownlint-disable MD033 MD041 MD013 -->
-This build is being executed on an internal Jenkins, only RTI employers can access the build logs. To give information to external users, we have configured the status checks.
+This build is being executed on an internal Jenkins, only RTI employees can access the build logs. To give information to external users, we have configured the status checks.
 
 # Pipeline description
 
