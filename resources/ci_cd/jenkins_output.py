@@ -34,6 +34,7 @@ def main():
     else:
         rti_connext_dds_path = str(found_rti_connext_dds[0])
         rti_package_version = rti_connext_dds_path.split("-")[-1]
+        os.environ["NDDSHOME"] = str(rti_connext_dds_path)
 
     with open("resources/ci_cd/jenkins_template.md", "r") as file:
         text = file.read()
