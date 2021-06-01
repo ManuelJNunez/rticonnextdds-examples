@@ -39,11 +39,11 @@ pipeline {
                     }''',
                 )
 
+                sh 'chmod a+x $RTI_INSTALLATION_PATH/rti_connext_dds-?.?.?/bin/rtiddsgen'
+
                 script {
                     detailsText = readFile("jenkins_output.md")
                 }
-
-                sh 'chmod 755 $NDDSHOME/bin/rtiddsgen'
             }
 
             post {
