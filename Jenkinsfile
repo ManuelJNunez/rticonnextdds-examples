@@ -34,12 +34,11 @@ pipeline {
                             "sortOrder": "desc",
                             "limit": 1,
                             "flat": true,
-                            "explode": true
                         }]
                     }''',
                 )
 
-                sh 'chmod a+x $RTI_INSTALLATION_PATH/rti_connext_dds-?.?.?/bin/rtiddsgen'
+                sh 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz'
 
                 script {
                     detailsText = readFile("jenkins_output.md")
