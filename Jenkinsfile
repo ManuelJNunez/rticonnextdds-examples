@@ -42,6 +42,8 @@ pipeline {
                 script {
                     detailsText = readFile("jenkins_output.md")
                 }
+
+                sh 'chmod 755 $NDDSHOME/bin/rtiddsgen'
             }
 
             post {
