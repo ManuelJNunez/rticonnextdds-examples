@@ -10,7 +10,8 @@
 # inability to use the software.
 
 """
-Creates a Markdown file with the output of the Jenkins stages
+Creates a Markdown file with the text and information for the GitHub check
+details URL.
 """
 
 import os
