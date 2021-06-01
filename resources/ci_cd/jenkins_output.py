@@ -14,7 +14,6 @@ Creates a Markdown file with the output of the Jenkins stages
 """
 
 import os
-import sys
 import platform
 import subprocess
 from pathlib import Path
