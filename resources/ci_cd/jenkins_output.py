@@ -21,12 +21,9 @@ from pathlib import Path
 
 
 def main():
-    try:
-        rti_installation_path = Path(
-            os.getenv("RTI_INSTALLATION_PATH") or Path.home()
-        ).resolve(strict=True)
-    except FileNotFoundError:
-        sys.exit("The RTI_INSTALLATION_PATH does not exist.")
+    rti_installation_path = Path(
+        os.getenv("RTI_INSTALLATION_PATH") or Path.home()
+    ).resolve(strict=True)
 
     found_rti_connext_dds = list(
         rti_installation_path.glob("rti_connext_dds-?.?.?")
