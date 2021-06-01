@@ -38,7 +38,7 @@ pipeline {
                     }''',
                 )
 
-                sh 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz'
+                sh 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
 
                 script {
                     detailsText = readFile("jenkins_output.md")
