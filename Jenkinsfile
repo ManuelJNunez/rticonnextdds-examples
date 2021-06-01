@@ -33,7 +33,7 @@ pipeline {
                             "sortBy": ["created"],
                             "sortOrder": "desc",
                             "limit": 1,
-                            "flat": true,
+                            "flat": true
                         }]
                     }''',
                 )
