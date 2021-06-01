@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         RTI_MIN_PACKAGE_URL = credentials('rti-min-package-url')
-        RTI_INSTALLATION_PATH = "${WORKSPACE}"
+        RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
     }
 
     stages {
@@ -24,8 +24,21 @@ pipeline {
                     status: 'IN_PROGRESS', title: 'Downloading', text: detailsText,
                     summary: ':arrow_down: Downloading RTI Connext DDS libraries...'
 
-                sh 'python3 resources/ci_cd/linux_install.py'
-                sh 'python3 resources/ci_cd/jenkins_output.py'
+                rtDownload (
+                    serverId: 'rti-artifactory',
+                    spec: '''{
+                        "files": [
+                        {
+                            "pattern": "connext-ci/pro/weekly/",
+                            "props": "rti.artifact.architecture=x64Linux4gcc7.3.0;rti.artifact.kind=staging",
+                            "sortBy": "created",
+                            "sortOrder": "desc",
+                            "limit": 1,
+                            "flat": true
+                            "explode": true
+                        }]
+                    }''',
+                )
 
                 script {
                     detailsText = readFile("jenkins_output.md")
