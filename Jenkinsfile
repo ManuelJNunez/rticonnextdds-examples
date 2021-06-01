@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        RTI_INSTALLATION_PATH = "${WORKSPACE}"
+        RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
     }
 
     stages {
