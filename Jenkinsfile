@@ -30,10 +30,10 @@ pipeline {
                         {
                             "pattern": "connext-ci/pro/weekly/",
                             "props": "rti.artifact.architecture=x64Linux4gcc7.3.0;rti.artifact.kind=staging",
-                            "sortBy": "created",
+                            "sortBy": ["created"],
                             "sortOrder": "desc",
                             "limit": 1,
-                            "flat": true
+                            "flat": true,
                             "explode": true
                         }]
                     }''',
