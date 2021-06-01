@@ -7,7 +7,6 @@ pipeline {
     }
 
     environment {
-        RTI_MIN_PACKAGE_URL = credentials('rti-min-package-url')
         RTI_INSTALLATION_PATH = "${WORKSPACE}"
     }
 
