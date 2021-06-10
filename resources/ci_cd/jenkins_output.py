@@ -79,11 +79,15 @@ def main():
     logs_path = Path(os.getenv("RTI_LOGS_FILE"))
 
     replace = ""
+    LINES_TO_WRITE = 100
     if logs_path.is_file():
-        replace = open(logs_path, "r").read()
+        replace = open(logs_path, "r").readlines()
+        replace = "\n".join(replace[-LINES_TO_WRITE:])
         logs_path.unlink()
 
-    text = text.replace("@LOGS@", replace or "There are no logs for this job")
+    text = text.replace(
+        "@LOGS@", replace or "There are no logs for this job at the moment"
+    )
 
     with open("jenkins_output.md", "w") as file:
         file.write(text)
