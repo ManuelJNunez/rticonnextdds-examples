@@ -82,7 +82,7 @@ def main():
     if logs_path.is_file():
         replace = open(logs_path, "r").read()
         logs_path.unlink()
-    
+
     text = text.replace("@LOGS@", replace or "There are no logs for this job")
 
     with open("jenkins_output.md", "w") as file:
