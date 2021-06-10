@@ -34,3 +34,13 @@ The pipeline is defined [here](https://github.com/rticommunity/rticonnextdds-exa
 
 </p>
 </details>
+
+<details><summary>Logs</summary>
+<p>
+
+```plaintext
+@LOGS@
+```
+
+</p>
+</details>

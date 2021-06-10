@@ -23,7 +23,7 @@ from pathlib import Path
 def main():
     rti_installation_path = Path(
         os.getenv("RTI_INSTALLATION_PATH") or Path.home()
-    ).resolve()
+    )
 
     found_rti_connext_dds = list(
         rti_installation_path.glob("rti_connext_dds-?.?.?")
@@ -70,13 +70,20 @@ def main():
 
     with open("Dockerfile", "r") as file:
         dockerfile = file.read()
-
-    text = text.replace("@DOCKERFILE@", dockerfile)
+        text = text.replace("@DOCKERFILE@", dockerfile)
 
     with open("Jenkinsfile", "r") as file:
         jenkinsfile = file.read()
+        text = text.replace("@JENKINSFILE@", jenkinsfile)
 
-    text = text.replace("@JENKINSFILE@", jenkinsfile)
+    logs_path = Path(os.getenv("RTI_LOGS_FILE"))
+
+    replace = ""
+    if logs_path.is_file():
+        replace = open(logs_path, "r").read()
+        logs_path.unlink()
+    
+    text = text.replace("@LOGS@", replace or "There are no logs for this job")
 
     with open("jenkins_output.md", "w") as file:
         file.write(text)
