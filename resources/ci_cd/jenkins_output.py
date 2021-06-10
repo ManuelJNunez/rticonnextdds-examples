@@ -85,9 +85,7 @@ def main():
         replace = "\n".join(replace[-LINES_TO_WRITE:])
         logs_path.unlink()
 
-    text = text.replace(
-        "@LOGS@", replace or "There are no logs for this job"
-    )
+    text = text.replace("@LOGS@", replace or "There are no logs for this job")
 
     with open("jenkins_output.md", "w") as file:
         file.write(text)
