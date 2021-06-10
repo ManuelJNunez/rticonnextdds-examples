@@ -86,7 +86,7 @@ def main():
         logs_path.unlink()
 
     text = text.replace(
-        "@LOGS@", replace or "There are no logs for this job at the moment"
+        "@LOGS@", replace or "There are no logs for this job"
     )
 
     with open("jenkins_output.md", "w") as file:
