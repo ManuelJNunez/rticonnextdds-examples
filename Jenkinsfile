@@ -5,7 +5,10 @@ def detailstextStatic
 
 pipeline {
     agent {
-        dockerfile true
+        dockerfile {
+            filename 'Dockerfile'
+            label 'docker'
+        }
     }
 
     environment {
