@@ -1,3 +1,4 @@
+<!-- Hi -->
 # rticonnextdds-examples
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rticommunity/rticonnextdds-examples/Build%20and%20run%20static%20analysis?event=push)](https://github.com/rticommunity/rticonnextdds-examples/actions/workflows/build.yml)
