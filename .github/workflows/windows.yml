@@ -1,0 +1,12 @@
+name: Windows testing
+
+on:
+  push:
+
+jobs:
+  python:
+    runs-on: windows-2016
+    name: Windows image testing
+    steps:
+      - name: Python version
+        run: python --version
