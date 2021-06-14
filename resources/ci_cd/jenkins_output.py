@@ -36,7 +36,7 @@ def main():
         rti_package_version = rti_connext_dds_path.split("-")[-1]
         os.environ["NDDSHOME"] = str(rti_connext_dds_path)
 
-    with open("resources/ci_cd/jenkins_template.md", "r") as file:
+    with open("resources/markdown_templates/JenkinsTemplate.md", "r") as file:
         text = file.read()
 
     text = text.replace("@RTI_PACKAGE_VERSION@", rti_package_version)
@@ -76,14 +76,17 @@ def main():
         jenkinsfile = file.read()
         text = text.replace("@JENKINSFILE@", jenkinsfile)
 
-    logs_path = Path(os.getenv("RTI_LOGS_FILE"))
+    rti_logs_file = os.getenv("RTI_LOGS_FILE")
+    replace = None
 
-    replace = ""
-    LINES_TO_WRITE = 100
-    if logs_path.is_file():
-        replace = open(logs_path, "r").readlines()
-        replace = "".join(replace[-LINES_TO_WRITE:])
-        logs_path.unlink()
+    if rti_logs_file is not None:
+        logs_path = Path(rti_logs_file)
+
+        LINES_TO_WRITE = 100
+        if logs_path.is_file():
+            replace = open(logs_path, "r").readlines()
+            replace = "".join(replace[-LINES_TO_WRITE:])
+            logs_path.unlink()
 
     text = text.replace("@LOGS@", replace or "There are no logs for this job")
 
