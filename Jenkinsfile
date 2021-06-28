@@ -17,10 +17,7 @@ pipeline {
 
         stage('Build sequence') {
             agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    label 'none'
-                }
+                dockerfile true
             }
 
             environment {
