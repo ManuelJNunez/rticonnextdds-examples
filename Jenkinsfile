@@ -163,6 +163,14 @@ pipeline {
                     }
                 }
             }
+
+            post {
+                aborted {
+                    publishChecks conclusion: 'CANCELED', detailsURL: DETAILS_URL,
+                        name: 'Waiting for executor', title: 'Aborted', text: detailsText,
+                        summary: ':no_entry: The pipeline was aborted.'
+                }
+            }
         }
     }
 }
