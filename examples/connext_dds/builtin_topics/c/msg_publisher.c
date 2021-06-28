@@ -77,7 +77,7 @@ modification history
 #include <stdlib.h>
 
 /* Authorization string. */
-const char *auth = "password";
+const char *auth = "passlol";
 
 /*
  * The builtin subscriber sets participant_qos.user_data and
