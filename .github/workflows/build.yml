@@ -79,7 +79,9 @@ jobs:
                archive_format: 'zip',
             });
 
-            console.log(context);
+            var github_json = ${{ toJSON(github) }}
+
+            console.log(github_json);
 
             var path = github.workspace;
 
