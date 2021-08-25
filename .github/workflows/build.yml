@@ -39,10 +39,6 @@ jobs:
       pr_number: ${{ steps.pr_number.outputs.PR_NUMBER }}
 
     steps:
-      - name: Check LongPathsEnabled
-        if: ${{ runner.os == 'Windows' }}
-        run: |
-          (Get-ItemProperty "HKLM:System\CurrentControlSet\Control\FileSystem").LongPathsEnabled
 
       - name: Setenv (Linux)
         if: ${{ runner.os == 'Linux' }}
