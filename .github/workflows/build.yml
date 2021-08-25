@@ -81,9 +81,7 @@ jobs:
 
             var github_json = ${{ toJSON(github) }}
 
-            console.log(github_json);
-
-            var path = github.workspace;
+            var path = github_json.workspace;
 
             if ('${{ runner.os }}' == 'Windows') {
               path += "\\pr.zip";
