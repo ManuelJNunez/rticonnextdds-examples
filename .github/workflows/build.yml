@@ -24,6 +24,9 @@ jobs:
       matrix:
         os: [ubuntu-20.04, macos-11, windows-2016]
 
+    defaults:
+      shell: bash
+
     # This job will be executed if the "PR handler" finalized successfully or
     # if this workflow was triggered by a push event.
     if: >
@@ -134,10 +137,10 @@ jobs:
         if: ${{ runner.os == 'Windows' }}
         working-directory: D:\a
         run: |
-          New-Item -ItemType directory -Path D:\a\rti
-          Copy-Item -Path "D:\a\${{ github.event.repository.name }}\${{ github.event.repository.name }}\*" -Destination D:\a\rti -Recurse
+          mkdir rti
+          cp -a /d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/ /d/a/rti
           cd rti
-          python resources\ci_cd\linux_build.py
+          python resources/ci_cd/linux_build.py
 
       # This script will compile the examples in Linux & macOS
       - name: Build all the examples (Linux & macOS)
