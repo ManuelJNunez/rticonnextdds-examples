@@ -79,6 +79,8 @@ jobs:
                archive_format: 'zip',
             });
 
+            console.log(context);
+
             var path = github.workspace;
 
             if ('${{ runner.os }}' == 'Windows') {
