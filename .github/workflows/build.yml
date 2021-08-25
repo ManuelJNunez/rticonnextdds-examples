@@ -137,7 +137,6 @@ jobs:
           mkdir rti
           cp -a /d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/* /d/a/rti
           cd rti
-          ls -la
           python resources/ci_cd/linux_build.py
 
       # This script will compile the examples in Linux & macOS
