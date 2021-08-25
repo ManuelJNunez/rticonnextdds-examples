@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2016]
+        os: [ubuntu-20.04, macos-11, windows-2016]
 
     defaults:
       run:
@@ -114,7 +114,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
-              body: `The compilation is starting. Take a look [here](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`
+              body: `The compilation is starting on ${{ runner.os }}. Take a look [here](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`
             });
 
       # If this workflow was triggered by a push event, it will download the
@@ -185,7 +185,7 @@ jobs:
             if ('${{ needs.build.result }}' == 'success')
               message = 'Everything is OK. Thank you for the PR!';
             else
-              message = 'Oops, something went wrong!';
+              message = 'Oops, something went wrong! Plase, take a look of the build logs to see what happened.';
           
             var issue_number = ${{ needs.build.outputs.pr_number }};
             await github.issues.createComment({
