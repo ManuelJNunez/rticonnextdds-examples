@@ -162,7 +162,7 @@ jobs:
 
   commentpr:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build]
     name: Comment PR
 
     # This job will be executed if this workflow was triggered by a
