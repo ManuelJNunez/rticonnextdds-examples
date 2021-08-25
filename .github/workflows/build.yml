@@ -78,7 +78,16 @@ jobs:
                artifact_id: matchArtifact.id,
                archive_format: 'zip',
             });
-            fs.writeFileSync("${{github.workspace}}\\pr.zip", Buffer.from(download.data));
+            var path = "${{github.workspace}}"
+
+            if ('${{ runner.os }}' == 'Windows') {
+              path = path.replace("\", "\\")
+              path += "\\pr.zip"
+            } else {
+              path += "/pr.zip"
+            }
+
+            fs.writeFileSync(path, Buffer.from(download.data));
 
       # Unzip the artifacts.
       - name: Unzip artifact
