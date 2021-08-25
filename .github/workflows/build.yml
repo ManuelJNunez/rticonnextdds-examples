@@ -132,11 +132,12 @@ jobs:
       # the examples.
       - name: Build all the examples (Windows)
         if: ${{ runner.os == 'Windows' }}
-        working-directory: D:\a
+        working-directory: /d/a
         run: |
           mkdir rti
           cp -a /d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/ /d/a/rti
           cd rti
+          ls -la
           python resources/ci_cd/linux_build.py
 
       # This script will compile the examples in Linux & macOS
