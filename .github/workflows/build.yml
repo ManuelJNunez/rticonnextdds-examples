@@ -25,7 +25,8 @@ jobs:
         os: [ubuntu-20.04, macos-11, windows-2016]
 
     defaults:
-      shell: bash
+      run:
+        shell: bash
 
     # This job will be executed if the "PR handler" finalized successfully or
     # if this workflow was triggered by a push event.
