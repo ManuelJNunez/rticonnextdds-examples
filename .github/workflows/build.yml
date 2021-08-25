@@ -132,7 +132,7 @@ jobs:
       # the examples.
       - name: Build all the examples (Windows)
         if: ${{ runner.os == 'Windows' }}
-        working-directory: /d/a
+        working-directory: D:\a
         run: |
           mkdir rti
           cp -a /d/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/ /d/a/rti
