@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-11, windows-2016]
+        os: [windows-2016]
 
     defaults:
       run:
@@ -78,7 +78,7 @@ jobs:
                artifact_id: matchArtifact.id,
                archive_format: 'zip',
             });
-            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+            fs.writeFileSync('${{github.workspace}}\pr.zip', Buffer.from(download.data));
 
       # Unzip the artifacts.
       - name: Unzip artifact
