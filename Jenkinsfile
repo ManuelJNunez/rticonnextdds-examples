@@ -48,7 +48,7 @@ pipeline {
                         }
 
                         stages {
-                            stage('Download ${ARCHITECTURE} packages') {
+                            stage('Download packages') {
                                 steps {
                                     publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
                                             summary: ':white_check_mark: Build started.',
@@ -109,7 +109,7 @@ pipeline {
                                 }
                             }
 
-                            stage('Build ${ARCHITECTURE}') {
+                            stage('Build') {
                                 steps {
                                     publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME, 
                                         status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
