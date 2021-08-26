@@ -47,18 +47,7 @@ pipeline {
                             }
                         }
 
-                        if (${ARCHITECTURE} == 'x64Win64VS2017') {
-                            agent {
-                                docker {
-                                    image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
-                                    label 'docker-win'
-                                    alwaysPull true
-                                    reuseNode true
-                                }
-                            }
-                        }
-
-                        stage('Build') {
+                        stage('Download ${ARCHITECTURE} packages') {
                             steps {
                                 publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
                                         summary: ':white_check_mark: Build started.',
@@ -119,7 +108,7 @@ pipeline {
                             }
                         }
 
-                        stage('Build') {
+                        stage('Build ${ARCHITECTURE}') {
                             steps {
                                 publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME, 
                                     status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
