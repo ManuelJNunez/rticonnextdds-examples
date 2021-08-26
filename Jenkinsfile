@@ -47,7 +47,7 @@ pipeline {
                             }
                         }
 
-                        if (${ARCHITECTURE} == "x64Win64VS2017") {
+                        if (ARCHITECTURE == "x64Win64VS2017") {
                             agent {
                                 docker {
                                     image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
