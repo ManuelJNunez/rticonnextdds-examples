@@ -48,7 +48,6 @@ pipeline {
                         }
 
                         stages {
-                            node {
                             stage('Download packages') {
                             
                                 steps {
@@ -122,7 +121,6 @@ pipeline {
                                             summary: ':no_entry: The download of RTI Connext DDS libraries was aborted.'
                                     }
                                 }
-                            }
                             }
 
                             stage('Build') {
