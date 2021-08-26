@@ -49,18 +49,18 @@ pipeline {
 
                         stages {
                             stage('Download packages') {
-                                steps {
-                                    if (ARCHITECTURE == "x64Win64VS2017") {
-                                        agent {
-                                            docker {
-                                                image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
-                                                label 'docker-win'
-                                                alwaysPull true
-                                                reuseNode true
-                                            }
+                                if (ARCHITECTURE == "x64Win64VS2017") {
+                                    agent {
+                                        docker {
+                                            image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                                            label 'docker-win'
+                                            alwaysPull true
+                                            reuseNode true
                                         }
                                     }
-
+                                }
+                            
+                                steps {
                                     publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
                                             summary: ':white_check_mark: Build started.',
                                             title: 'Passed'
@@ -120,49 +120,36 @@ pipeline {
                                 }
                             }
 
-                            node {
-                                stage('Build') {
-                                    if (ARCHITECTURE == "x64Win64VS2017") {
-                                        agent {
-                                            docker {
-                                                image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
-                                                label 'docker-win'
-                                                alwaysPull true
-                                                reuseNode true
-                                            }
-                                        }
-                                    }
-                                    
-                                    steps {
-                                        publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME, 
-                                            status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
-                                            title: 'Building', text: detailsText
+                            stage('Build') {
+                                steps {
+                                    publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME, 
+                                        status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
+                                        title: 'Building', text: detailsText
 
-                                        sh  """#!/bin/bash
-                                            set -o pipefail
-                                            python3 resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
-                                            """
-                                    }
+                                    sh  """#!/bin/bash
+                                        set -o pipefail
+                                        python3 resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
+                                        """
+                                }
 
-                                    post {
-                                        always{
-                                            sh 'python3 resources/ci_cd/jenkins_output.py'
-                                        }
-                                        success {
-                                            publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME,
-                                                summary: ':white_check_mark: All the examples were built succesfully.',
-                                                title: 'Passed', text: readFile("jenkins_output.md")
-                                        }
-                                        failure {
-                                            publishChecks conclusion: 'FAILURE', detailsURL: DETAILS_URL,
-                                                name: STAGE_NAME, title: 'Failed', text: readFile("jenkins_output.md"),
-                                                summary: ':warning: There was an error building the examples.'
-                                        }
-                                        aborted {
-                                            publishChecks conclusion: 'CANCELED', detailsURL: DETAILS_URL,
-                                                name: STAGE_NAME, title: 'Aborted', text: readFile("jenkins_output.md"),
-                                                summary: ':no_entry: The examples build was aborted'
-                                        }
+                                post {
+                                    always{
+                                        sh 'python3 resources/ci_cd/jenkins_output.py'
+                                    }
+                                    success {
+                                        publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME,
+                                            summary: ':white_check_mark: All the examples were built succesfully.',
+                                            title: 'Passed', text: readFile("jenkins_output.md")
+                                    }
+                                    failure {
+                                        publishChecks conclusion: 'FAILURE', detailsURL: DETAILS_URL,
+                                            name: STAGE_NAME, title: 'Failed', text: readFile("jenkins_output.md"),
+                                            summary: ':warning: There was an error building the examples.'
+                                    }
+                                    aborted {
+                                        publishChecks conclusion: 'CANCELED', detailsURL: DETAILS_URL,
+                                            name: STAGE_NAME, title: 'Aborted', text: readFile("jenkins_output.md"),
+                                            summary: ':no_entry: The examples build was aborted'
                                     }
                                 }
                             }
