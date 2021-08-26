@@ -50,18 +50,21 @@ pipeline {
                         stages {
                             node {
                             stage('Download packages') {
-                                if (ARCHITECTURE == "x64Win64VS2017") {
-                                    agent {
-                                        docker {
-                                            image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
-                                            label 'docker-win'
-                                            alwaysPull true
-                                            reuseNode true
-                                        }
-                                    }
-                                }
                             
                                 steps {
+                                    script {
+                                        if(ARCHITECTURE == 'x64Win64VS2017') {
+                                            agent {
+                                                docker {
+                                                    image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                                                    label 'docker-win'
+                                                    alwaysPull true
+                                                    reuseNode true
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
                                             summary: ':white_check_mark: Build started.',
                                             title: 'Passed'
