@@ -48,6 +48,7 @@ pipeline {
                         }
 
                         stages {
+                            node {
                             stage('Download packages') {
                                 if (ARCHITECTURE == "x64Win64VS2017") {
                                     agent {
@@ -118,6 +119,7 @@ pipeline {
                                             summary: ':no_entry: The download of RTI Connext DDS libraries was aborted.'
                                     }
                                 }
+                            }
                             }
 
                             stage('Build') {
