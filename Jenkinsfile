@@ -47,20 +47,20 @@ pipeline {
                             }
                         }
 
-                        if (ARCHITECTURE == "x64Win64VS2017") {
-                            agent {
-                                docker {
-                                    image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
-                                    label 'docker-win'
-                                    alwaysPull true
-                                    reuseNode true
-                                }
-                            }
-                        }
-
                         stages {
                             stage('Download packages') {
                                 steps {
+                                    if (ARCHITECTURE == "x64Win64VS2017") {
+                                        agent {
+                                            docker {
+                                                image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                                                label 'docker-win'
+                                                alwaysPull true
+                                                reuseNode true
+                                            }
+                                        }
+                                    }
+
                                     publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
                                             summary: ':white_check_mark: Build started.',
                                             title: 'Passed'
@@ -122,6 +122,17 @@ pipeline {
 
                             stage('Build') {
                                 steps {
+                                    if (ARCHITECTURE == "x64Win64VS2017") {
+                                        agent {
+                                            docker {
+                                                image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                                                label 'docker-win'
+                                                alwaysPull true
+                                                reuseNode true
+                                            }
+                                        }
+                                    }
+
                                     publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME, 
                                         status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
                                         title: 'Building', text: detailsText
