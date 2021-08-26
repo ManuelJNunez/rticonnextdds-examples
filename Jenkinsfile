@@ -47,6 +47,17 @@ pipeline {
                             }
                         }
 
+                        if (${ARCHITECTURE} == "x64Win64VS2017") {
+                            agent {
+                                docker {
+                                    image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                                    label 'docker-win'
+                                    alwaysPull true
+                                    reuseNode true
+                                }
+                            }
+                        }
+
                         stages {
                             stage('Download packages') {
                                 steps {
@@ -81,7 +92,7 @@ pipeline {
 
                                     // We cannot use the explode option because it is bugged.
                                     // https://www.jfrog.com/jira/browse/HAP-1154
-                                    sh 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
+                                    sh 'tar zxvf connextdds-staging-${ARCHITECTURE}.tgz unlicensed/'
                                     
                                     sh 'python3 resources/ci_cd/jenkins_output.py'
 
