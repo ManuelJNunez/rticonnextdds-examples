@@ -25,13 +25,6 @@ pipeline {
         }
 
         stage('Build & Test sequence') {
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    label 'docker'
-                }
-            }
-
             environment {
                 RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
                 RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
@@ -39,6 +32,13 @@ pipeline {
 
             parallel {
                 stage('Build (Linux)') {
+                    agent {
+                        dockerfile {
+                            filename 'Dockerfile'
+                            label 'docker'
+                        }
+                    }
+
                     stages {
                         stage('Download packages (Linux)') {
 
