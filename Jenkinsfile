@@ -16,7 +16,6 @@ pipeline {
     agent none
 
     stages {
-        stage('Build & Test sequence') {
             environment {
                 RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
                 RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
@@ -171,7 +170,6 @@ pipeline {
                         summary: ':no_entry: The pipeline was aborted'
                 }
             }
-        }
     }
 }
 
