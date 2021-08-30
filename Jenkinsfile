@@ -19,8 +19,8 @@ pipeline {
         stage('Executor Check') {
             steps {
                 publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
-                        status: 'IN_PROGRESS', title: 'Waiting',
-                        summary: ':hourglass: Waiting for next available executor...'
+                    status: 'IN_PROGRESS', title: 'Waiting',
+                    summary: ':hourglass: Waiting for next available executor...'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
                 RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
                 RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
             }
-
+            steps {
             parallel {
                 stage('Build (Linux)') {
                     agent {
@@ -137,6 +137,7 @@ pipeline {
                         }
                     }
                 }
+            }
             }
 
             stage('Static Analysis') {
