@@ -130,9 +130,11 @@ pipeline {
 
                 stage('Build sequence (Windows)') {
                     agent {
-                        dockerfile {
-                            filename 'Dockerfile'
-                            label 'docker'
+                        docker {
+                            image 'repo.rti.com:443/docker-local/doozer-win64-msvc14:ltsc2019'
+                            label 'docker-win'
+                            alwaysPull true
+                            reuseNode true
                         }
                     }
 
