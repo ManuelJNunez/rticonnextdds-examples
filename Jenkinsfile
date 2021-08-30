@@ -16,7 +16,9 @@ pipeline {
     agent none
 
     stages {
-        stage('Build sequence') {
+        stage('Parallel build') {
+        parallel {
+        stage('Build sequence (Linux)') {
             agent {
                 dockerfile {
                     filename 'Dockerfile'
@@ -170,5 +172,7 @@ pipeline {
                 }
             }
         }
+    }
+    }
     }
 }
