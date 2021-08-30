@@ -16,11 +16,12 @@ pipeline {
     agent none
 
     stages {
-            environment {
-                RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
-                RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
-            }
 
+            stage('Parallel build') {
+                environment {
+                    RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
+                    RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
+                }
             parallel {
                 stage('Build (Linux)') {
                     agent {
@@ -157,19 +158,12 @@ pipeline {
                             name: STAGE_NAME, title: 'Aborted', text: readFile("jenkins_output.md"),
                             summary: ':no_entry: The static analysis was aborted'
                     }
+                    cleanup {
+                        cleanWs()
+                    }
                 }
             }
-
-            post {
-                cleanup {
-                    cleanWs()
-                }
-                aborted {
-                    publishChecks conclusion: 'CANCELED', detailsURL: DETAILS_URL,
-                        name: 'Waiting for executor', title: 'Aborted',
-                        summary: ':no_entry: The pipeline was aborted'
-                }
-            }
+        }
     }
 }
 
