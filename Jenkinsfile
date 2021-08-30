@@ -16,25 +16,10 @@ pipeline {
     agent none
 
     stages {
-        stage('Executor Check') {
-            steps {
-                publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
-                    status: 'IN_PROGRESS', title: 'Waiting',
-                    summary: ':hourglass: Waiting for next available executor...'
-            }
-        }
-
         stage('Build & Test sequence') {
             environment {
                 RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
                 RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
-            }
-
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    label 'docker'
-                }
             }
 
             parallel {
@@ -50,10 +35,6 @@ pipeline {
                         stage('Download packages (Linux)') {
 
                             steps {
-                                publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
-                                        summary: ':white_check_mark: Build started.',
-                                        title: 'Passed'
-
                                 sh 'python3 resources/ci_cd/jenkins_output.py'
 
                                 script {
