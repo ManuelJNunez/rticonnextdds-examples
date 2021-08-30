@@ -25,11 +25,7 @@ pipeline {
         }
 
         stage('Build & Test sequence') {
-            environment {
-                RTI_INSTALLATION_PATH = "${WORKSPACE}/unlicensed"
-                RTI_LOGS_FILE = "${WORKSPACE}/output_logs.txt"
-            }
-            steps {
+
             parallel {
                 stage('Build (Linux)') {
                     agent {
@@ -137,7 +133,6 @@ pipeline {
                         }
                     }
                 }
-            }
             }
 
             stage('Static Analysis') {
