@@ -16,14 +16,6 @@ pipeline {
     agent none
 
     stages {
-        stage('Executor Check') {
-            steps {
-                publishChecks detailsURL: DETAILS_URL, name: 'Waiting for executor',
-                        status: 'IN_PROGRESS', title: 'Waiting',
-                        summary: ':hourglass: Waiting for next available executor...'
-            }
-        }
-
         stage('Build sequence') {
             agent {
                 dockerfile {
@@ -57,8 +49,7 @@ pipeline {
                         rtDownload (
                             serverId: 'rti-artifactory',
                             spec: '''{
-                                "files": [
-                                {
+                                "files": [{
                                     "pattern": "connext-ci/pro/weekly/",
                                     "props": "rti.artifact.architecture=x64Linux4gcc7.3.0;rti.artifact.kind=staging",
                                     "sortBy": ["created"],
