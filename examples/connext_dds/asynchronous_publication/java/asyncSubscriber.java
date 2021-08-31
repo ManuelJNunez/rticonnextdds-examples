@@ -80,6 +80,12 @@ public class asyncSubscriber {
     // Public Methods
     // -----------------------------------------------------------------------
 
+
+
+
+
+
+
     public static void main(String[] args) {
         // --- Get domain ID --- //
         int domainId = 0;
