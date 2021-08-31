@@ -150,7 +150,7 @@ pipeline {
                                     summary: ':white_check_mark: Build started.',
                                     title: 'Passed'
 
-                                sh 'python3 resources/ci_cd/jenkins_output.py'
+                                bat 'python3 resources/ci_cd/jenkins_output.py'
 
                                 script {
                                     detailsText = readFile("jenkins_output.md")
@@ -176,9 +176,9 @@ pipeline {
 
                                 // We cannot use the explode option because it is bugged.
                                 // https://www.jfrog.com/jira/browse/HAP-1154
-                                sh 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
+                                bat 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
                                 
-                                sh 'python3 resources/ci_cd/jenkins_output.py'
+                                bat 'python3 resources/ci_cd/jenkins_output.py'
 
                                 script {
                                     detailsText = readFile("jenkins_output.md")
@@ -210,7 +210,7 @@ pipeline {
                                     status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
                                     title: 'Building', text: detailsText
 
-                                sh  """#!/bin/bash
+                                bat  """#!/bin/bash
                                     set -o pipefail
                                     python3 resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
                                     """
