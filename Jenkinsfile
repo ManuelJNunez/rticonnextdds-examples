@@ -210,7 +210,8 @@ pipeline {
                                     title: 'Building', text: detailsText
 
                                 bat  """@echo off
-                                    python resources/ci_cd/linux_build.py || exit 1 | tee $RTI_LOGS_FILE
+                                    curl https://www.robvanderwoude.com/files/tee_nt.txt -o tee.bat
+                                    python resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
                                     """
                             }
 
