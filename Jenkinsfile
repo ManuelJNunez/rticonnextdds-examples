@@ -210,7 +210,7 @@ pipeline {
                                     status: 'IN_PROGRESS', summary: ':wrench: Building all the examples...', 
                                     title: 'Building', text: detailsText
 
-                                bat  """#!/bin/bash
+                                sh  """#!/bin/bash
                                     set -o pipefail
                                     python resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
                                     """
