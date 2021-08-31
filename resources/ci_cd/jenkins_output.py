@@ -43,6 +43,7 @@ def main():
     text = text.replace("@OPERATING_SYSTEM@", platform.system())
     text = text.replace("@MACHINE_TYPE@", platform.machine())
     text = text.replace("@OS_VERSION@", platform.release())
+    extra_rows = ""
 
     if platform.system() == "Linux":
         gcc_version = (
