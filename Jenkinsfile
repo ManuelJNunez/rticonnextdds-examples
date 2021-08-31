@@ -150,7 +150,7 @@ pipeline {
                                     summary: ':white_check_mark: Build started.',
                                     title: 'Passed'
 
-                                bat 'python3 resources/ci_cd/jenkins_output.py'
+                                bat 'python resources/ci_cd/jenkins_output.py'
 
                                 script {
                                     detailsText = readFile("jenkins_output.md")
@@ -178,7 +178,7 @@ pipeline {
                                 // https://www.jfrog.com/jira/browse/HAP-1154
                                 bat 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
                                 
-                                bat 'python3 resources/ci_cd/jenkins_output.py'
+                                bat 'python resources/ci_cd/jenkins_output.py'
 
                                 script {
                                     detailsText = readFile("jenkins_output.md")
@@ -212,13 +212,13 @@ pipeline {
 
                                 bat  """#!/bin/bash
                                     set -o pipefail
-                                    python3 resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
+                                    python resources/ci_cd/linux_build.py | tee $RTI_LOGS_FILE
                                     """
                             }
 
                             post {
                                 always{
-                                    sh 'python3 resources/ci_cd/jenkins_output.py'
+                                    bat 'python resources/ci_cd/jenkins_output.py'
                                 }
                                 success {
                                     publishChecks detailsURL: DETAILS_URL, name: STAGE_NAME,
