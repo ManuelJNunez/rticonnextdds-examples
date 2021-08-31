@@ -176,7 +176,7 @@ pipeline {
 
                                 // We cannot use the explode option because it is bugged.
                                 // https://www.jfrog.com/jira/browse/HAP-1154
-                                bat 'tar zxvf connextdds-staging-x64Linux4gcc7.3.0.tgz unlicensed/'
+                                bat 'tar zxvf connextdds-staging-x64Win64VS2017.tgz unlicensed/'
                                 
                                 bat 'python resources/ci_cd/jenkins_output.py'
 
