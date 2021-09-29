@@ -19,6 +19,18 @@
 #include "CameraImage.hpp"
 #include "application.hpp"
 
+
+
+
+
+
+
+
+
+
+
+
+
 const int PIXEL_COUNT = 10;
 
 // Simplest way to create the data sample
