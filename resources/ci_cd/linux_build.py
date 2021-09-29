@@ -14,12 +14,20 @@ The environment variable RTI_PACKAGE_VERSION must be assigned to find the
 correct RTIConnextDDS package version.
 
 """
+from io import FileIO
 import os
 import platform
 import sys
 import subprocess
 
 from pathlib import Path
+
+
+def print_lines(proc: subprocess.Popen, logfile: FileIO):
+    for line in proc.stdout:
+        sys.stdout.write(line.decode("utf-8"))
+        if logfile:
+            logfile.write(line.decode("utf-8"))
 
 
 def main():
@@ -34,6 +42,11 @@ def main():
         examples_dir = Path("examples/connext_dds").resolve(strict=True)
     except FileNotFoundError:
         sys.exit("Error: Examples directory not found.")
+
+    logfile = None
+
+    if len(sys.argv) > 1:
+        logfile = open(sys.argv[1], "w")
 
     found_rti_connext_dds = list(
         rti_installation_path.glob("rti_connext_dds-?.?.?")
@@ -62,19 +75,34 @@ def main():
     if platform.system() == "Windows":
         command += ["-G", "Visual Studio 15 2017", "-A", "x64"]
 
-    build_gen_result = subprocess.run(command, cwd=build_dir)
+    proc = subprocess.Popen(
+        command,
+        cwd=build_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
 
-    if build_gen_result.returncode:
+    print_lines(proc, logfile)
+
+    proc.wait()
+
+    if proc.returncode:
         sys.exit("There was some errors during generating the build system.")
 
     print("\n[RTICommunity] Compiling the examples...", flush=True)
 
-    building_result = subprocess.run(
+    proc = subprocess.Popen(
         ["cmake", "--build", ".", "--config", "Release"],
         cwd=build_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
     )
 
-    if building_result.returncode:
+    print_lines(proc, logfile)
+
+    proc.wait()
+
+    if proc.returncode:
         sys.exit("There was some errors during build.")
 
 
