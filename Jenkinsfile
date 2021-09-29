@@ -99,7 +99,7 @@ pipeline {
                                     title: 'Building', text: detailsText
 
                                 sh  """#!/bin/bash
-                                    python resources/ci_cd/linux_build.py $RTI_LOGS_FILE
+                                    python3 resources/ci_cd/linux_build.py $RTI_LOGS_FILE
                                     """
                             }
 
@@ -210,6 +210,7 @@ pipeline {
                                     title: 'Building', text: detailsText
 
                                 bat """@echo off
+                                    call C:\\buildtools\\Common7\\tools\\vsdevcmd.bat -arch=x64
                                     python resources/ci_cd/linux_build.py $RTI_LOGS_FILE
                                     """
                             }
