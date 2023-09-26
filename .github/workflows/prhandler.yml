@@ -22,6 +22,11 @@ jobs:
 
       # Save the PR number for the next workflow to create the current
       # workflow artifact along with the repository itself.
+      - name: Greet
+        run: echo Hi!
+
+      # Save the PR number for the next workflow to create the current
+      # workflow artifact along with the repository itself.
       - name: Save PR number
         run: echo ${{ github.event.number }} > ${{ github.workspace }}/NR
 
